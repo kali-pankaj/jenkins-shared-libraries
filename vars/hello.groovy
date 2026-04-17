@@ -7,3 +7,8 @@ def pankaj(){
 def college () {
   echo "Why are you not going college !!!!! "
 }
+def call(){
+  hello()
+  pankaj()
+  college()
+}
