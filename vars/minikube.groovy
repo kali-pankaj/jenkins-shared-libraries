@@ -1,4 +1,9 @@
-def call() {
+def call(Map config = [:]) {
+
+    def cpus   = config.get('cpus', 2)
+    def memory = config.get('memory', 4096)
+    def driver = config.get('driver', 'docker')
+
     sh """
     echo "========== MINIKUBE SETUP =========="
 
