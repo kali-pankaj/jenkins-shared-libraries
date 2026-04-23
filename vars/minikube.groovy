@@ -1,8 +1,19 @@
 def call() {
-    echo "hello pankaj how are you i am testing mimkkube how to run "
+    sh """
+        echo "minikube status check"
+        minikube status
 
-    minikube delete
-    minikube start --cpus=2 --memory=4096
-    echo "minekube start successful..."
+        echo "minikube delete"
+        minikube delete
+
+        echo "minikube start "
+        minikube start --cpus=2 --memory=4096
+
+        echo "kubectl node status"
+        kubectl get node
+
+        echo "all working fine"
+
+    """
     
 }
