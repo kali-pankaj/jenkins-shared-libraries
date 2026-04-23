@@ -5,3 +5,6 @@ minikube delete
 
 echo "minikube start"
 minikube start --cpus=2 --memory=4096
+
+miinkube status
+echo "minikube start successful.."
