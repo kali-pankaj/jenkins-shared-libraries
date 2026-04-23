@@ -10,7 +10,7 @@ def call() {
         minikube start --cpus=2 --memory=4096
 
         echo "kubectl node status"
-        kubectl get node
+        kubectl get nodes
 
         echo "all working fine"
 
