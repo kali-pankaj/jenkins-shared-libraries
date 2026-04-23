@@ -1,24 +1,50 @@
-def call(Map config = [:]) {
+#!/bin/bash
+echo "============================================"
+echo "Minikube Run and Coustom Image Deployment"
+echo "============================================"
 
-    def cpus   = config.get('cpus', 2)
-    def memory = config.get('memory', 4096)
-    def driver = config.get('driver', 'docker')
+# set script write or not 
+set -e
 
-    sh """
-    echo "========== MINIKUBE SETUP =========="
+if ! command -v minikube &> /dev/null 
+then
+    echo "Minikube is Installing..."
+    curl -LO https://github.com/kubernetes/minikube/releases/latest/download/minikube-linux-amd64
+    sudo install minikube-linux-amd64 /usr/local/bin/minikube 
+    rm minikube-linux-amd64
+    echo "Minikube Install Successful..."
+else
+    echo "Minikube already Install"
+fi
 
-    echo "Checking existing cluster..."
-    minikube status || true
+# Check minikube version 
+minikube version
 
-    echo "Deleting old cluster (if any)..."
-    minikube delete || true
+echo "============================================="
+echo "Minikube service status "
+echo "============================================="
 
-    echo "Starting Minikube..."
-    minikube start --driver=${driver} --cpus=${cpus} --memory=${memory}
+if minikube status | grep -q "Running"; then
+    echo "Minikube are running "
+else
+    minikube start --cpus=2 --memory=4096
+    echo "Minkkube Start and Running Know..."
+fi
 
-    echo "Checking cluster status..."
-    kubectl get nodes
+echo "Cluster information Check"
+kubectl get nodes
 
-    echo "Minikube setup completed ✅"
-    """
-}
+echo "Deploy Application..."
+kubectl apply -f deployment.yaml
+
+echo "Waiting for pods to be ready..."
+sleep 10
+
+echo "pods are Information check "
+kubectl get pods
+
+echo "Click url your application live or not"
+minikube service my-webapp --url
+
+echo "all process complete successful..."
+
