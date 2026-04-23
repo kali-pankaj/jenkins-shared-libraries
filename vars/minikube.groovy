@@ -1,16 +1,8 @@
 def call() {
-    sh """
-        echo "Checking Minikube status..."
+    echo "hello pankaj how are you i am testing mimkkube how to run "
 
-        minikube status 
-
-        echo "minikube start "
-        minikube start --cpus=2 --memory=4096
-
-        // kubectl apply -f kubernetes/my-webapp/
-
-        // kubectl get pods -o wide
-        minikube status 
-        echo "minikube starte successful..."
-    """
+    minikube delete
+    minikube start --cpus=2 --memory=4096
+    echo "minekube start successful..."
+    
 }
