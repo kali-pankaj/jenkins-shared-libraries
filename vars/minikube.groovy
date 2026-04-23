@@ -1,4 +1,5 @@
-#!/bin/bash
+def call () {
+    #!/bin/bash
 echo "============================================"
 echo "Minikube Run and Coustom Image Deployment"
 echo "============================================"
@@ -48,3 +49,5 @@ minikube service my-webapp --url
 
 echo "all process complete successful..."
 
+
+}
