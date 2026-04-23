@@ -1,4 +1,5 @@
 def call () {
+sh """
     #!/bin/bash
 echo "============================================"
 echo "Minikube Run and Coustom Image Deployment"
@@ -48,6 +49,6 @@ echo "Click url your application live or not"
 minikube service my-webapp --url
 
 echo "all process complete successful..."
-
+"""
 
 }
