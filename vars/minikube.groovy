@@ -1,19 +1,19 @@
 def call() {
     sh """
-        echo "minikube status check"
-        minikube status
+    echo "========== MINIKUBE SETUP =========="
 
-        echo "minikube delete"
-        minikube delete
+    echo "Checking existing cluster..."
+    minikube status || true
 
-        echo "minikube start "
-        minikube start --cpus=2 --memory=4096
+    echo "Deleting old cluster (if any)..."
+    minikube delete || true
 
-        echo "kubectl node status"
-        kubectl get nodes
+    echo "Starting Minikube..."
+    minikube start --driver=${driver} --cpus=${cpus} --memory=${memory}
 
-        echo "all working fine"
+    echo "Checking cluster status..."
+    kubectl get nodes
 
+    echo "Minikube setup completed ✅"
     """
-    
 }
